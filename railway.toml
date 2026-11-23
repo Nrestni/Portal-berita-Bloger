@@ -2,6 +2,9 @@
 builder = "nixpacks"
 buildCommand = "npm install --legacy-peer-deps && npm run build:all"
 
+[build.nixpacks]
+npmInstallCmd = "npm install --legacy-peer-deps"
+
 [deploy]
 startCommand = "node dist-server/server.js"
 restartPolicyType = "ON_FAILURE"
