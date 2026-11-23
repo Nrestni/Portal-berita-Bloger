@@ -193,7 +193,7 @@ class EngagementStore {
       articles: {},
       comments: [],
       readers: [],
-      readerSessionSecret: crypto.randomBytes(32).toString('hex'),
+      readerSessionSecret: process.env.READER_SESSION_SECRET || crypto.randomBytes(32).toString('hex'),
       moderationSettings: {
         requireApproval: false,
       },
@@ -201,7 +201,7 @@ class EngagementStore {
         email: getConfiguredAdminEmail(),
         passwordSalt: null,
         passwordHash: null,
-        sessionSecret: crypto.randomBytes(32).toString('hex'),
+        sessionSecret: process.env.ADMIN_SESSION_SECRET || crypto.randomBytes(32).toString('hex'),
       },
     };
   }
@@ -222,7 +222,7 @@ class EngagementStore {
         articles: parsed.articles && typeof parsed.articles === 'object' ? parsed.articles : {},
         comments: Array.isArray(parsed.comments) ? parsed.comments : [],
         readers: Array.isArray(parsed.readers) ? parsed.readers : [],
-        readerSessionSecret: parsed.readerSessionSecret || fallback.readerSessionSecret,
+        readerSessionSecret: process.env.READER_SESSION_SECRET || parsed.readerSessionSecret || fallback.readerSessionSecret,
         moderationSettings: {
           requireApproval: Boolean(parsed.moderationSettings?.requireApproval),
         },
@@ -233,7 +233,7 @@ class EngagementStore {
               : getConfiguredAdminEmail(),
           passwordSalt: parsed.admin?.passwordSalt || null,
           passwordHash: parsed.admin?.passwordHash || null,
-          sessionSecret: parsed.admin?.sessionSecret || fallback.admin.sessionSecret,
+          sessionSecret: process.env.ADMIN_SESSION_SECRET || parsed.admin?.sessionSecret || fallback.admin.sessionSecret,
         },
       };
       return merged;

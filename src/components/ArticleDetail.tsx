@@ -560,7 +560,13 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
               <div className="flex flex-wrap items-center gap-2">
                 <button
                   type="button"
-                  onClick={() => toggleLike(article.id, article.title)}
+                  onClick={() => {
+                    if (!canEngage) {
+                      onOpenReaderAuth?.();
+                      return;
+                    }
+                    toggleLike(article.id, article.title);
+                  }}
                   className={`min-h-[42px] inline-flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-colors cursor-pointer tabular-nums ${
                     stats.likedByMe
                       ? 'bg-rose-600 text-white'
@@ -575,7 +581,13 @@ export const ArticleDetail: React.FC<ArticleDetailProps> = ({
 
                 <button
                   type="button"
-                  onClick={scrollToComments}
+                  onClick={() => {
+                    if (!canEngage) {
+                      onOpenReaderAuth?.();
+                      return;
+                    }
+                    scrollToComments();
+                  }}
                   className="min-h-[42px] inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-200 text-xs font-semibold transition-colors cursor-pointer tabular-nums"
                 >
                   <MessageSquare className="w-4 h-4 text-blue-600 dark:text-blue-400" />
