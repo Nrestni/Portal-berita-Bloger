@@ -216,6 +216,27 @@ async function startServer() {
   const app = express();
   app.use(express.json());
 
+  // CORS — izinkan Firebase Hosting dan localhost mengakses API
+  const ALLOWED_ORIGINS = [
+    'https://newsapp-bloger.web.app',
+    'https://newsapp-bloger.firebaseapp.com',
+    'http://localhost:3000',
+    'http://localhost:5173',
+  ];
+  app.use((req: Request, res: Response, next: () => void) => {
+    const origin = req.headers.origin || '';
+    if (ALLOWED_ORIGINS.includes(origin) || !origin) {
+      res.setHeader('Access-Control-Allow-Origin', origin || '*');
+    }
+    res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization,x-reader-id,x-reader-secret,x-admin-token');
+    res.setHeader('Access-Control-Allow-Credentials', 'true');
+    if (req.method === 'OPTIONS') {
+      res.status(204).end();
+      return;
+    }
+    next();
+  });
   // 1. Health & Source Configuration Status
   app.get('/api/status', (_req: Request, res: Response) => {
     const hasBloggerKey = Boolean(getBloggerApiKey());
