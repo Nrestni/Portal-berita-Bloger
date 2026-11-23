@@ -229,7 +229,7 @@ async function startServer() {
       res.setHeader('Access-Control-Allow-Origin', origin || '*');
     }
     res.setHeader('Access-Control-Allow-Methods', 'GET,POST,PATCH,DELETE,OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization,x-reader-id,x-reader-secret,x-admin-token');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Authorization,x-reader-id,x-reader-secret,x-reader-token,x-admin-token');
     res.setHeader('Access-Control-Allow-Credentials', 'true');
     if (req.method === 'OPTIONS') {
       res.status(204).end();
