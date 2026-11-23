@@ -1,0 +1,25 @@
+services:
+  - type: web
+    name: newsapp-bloger-api
+    runtime: node
+    region: singapore
+    plan: free
+    buildCommand: npm install --legacy-peer-deps && npm run build:all
+    startCommand: node dist-server/server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+      - key: BLOGGER_BLOG_ID
+        value: "4682143712664244285"
+      - key: BLOGGER_API_KEY
+        sync: false
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false

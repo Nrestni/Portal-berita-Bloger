@@ -1,0 +1,6 @@
+{
+  "name": "NewsApp - Portal Berita Modern Blogger",
+  "description": "Portal informasi modern berbahasa Indonesia yang menyajikan berita terkini dari Blogger API v3.0, rekomendasi personal, data saham IDX/IHSG, indikator ekonomi resmi, dan tren teknologi digital.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
